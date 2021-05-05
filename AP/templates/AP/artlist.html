@@ -1,0 +1,22 @@
+{% extends 'AP/main.html' %}
+
+{% block content %}
+    <style>
+        a.box {display: flex; flex-wrap: wrap; flex-direction: row; margin: 10px;}
+    </style>
+    <div class="row box">
+    {% for art in works %}
+        {% if art.art is not None %}
+        <div>
+            <a class="box" href="art/{{ art.id }}">
+            <figure class="text-center">
+                <img src="{{ art.art.url }}" alt="{{ art.art.url }}" height="285px"
+                 style="border: 3px solid #62b6cb; border-radius: 3px; padding: 2px;">
+                <figcaption>{{ art.name }}</figcaption>
+            </figure>
+            </a>
+        </div>
+        {% endif %}
+    {% endfor %}
+    </div>
+{% endblock %}

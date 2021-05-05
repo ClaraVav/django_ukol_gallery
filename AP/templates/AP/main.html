@@ -1,0 +1,149 @@
+{% load static %}
+{{ form.media }}
+
+<html>
+    <head>
+        <title>ArtPalace</title>
+        <meta charset="UTF-8">
+
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
+              integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf"
+              crossorigin="anonymous">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+              integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+              crossorigin="anonymous">
+
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css">
+
+        <link rel="icon" type="image/png" sizes="32x32" href="../../../media/icons/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="../../../media/icons/favicon-16x16.png">
+        <link rel="manifest" href="/site.webmanifest">
+
+        <style>
+            body {background-color: #cae9ff;}
+            a:link, a:visited {color: #62b6cb;}
+            a:hover {color: #62b6cb; text-decoration: none; font-weight: bold;}
+            a {color: #1b4965;}
+            li {font-size: large;}
+            main {margin: 5px;}
+            h3, main h4 {color: #62b6cb;}
+            h1 {text-align: center;}
+            footer {
+                background-color: #62b6cb;
+                color: white;
+                padding-top: 20px;
+                padding-bottom: 20px;
+                margin-bottom: 0px;
+                padding-left: 15px;
+                padding-right: 15px;
+            }
+            a:hover h3, a:hover h4 {font-weight: bold;}
+            hr.dashed {border-top: 3px dashed #bbb;}
+            hr {border: 2px solid #1B4965;}
+            h2.nadpis {color: #62b6cb; text-decoration: underline; font-weight: bold; text-align: center;}
+            figcaption {color: #1b4965; border: 3px solid #62b6cb; border-radius: 3px; font-weight: bold; padding: 4px;}
+            div.alert {border: 3px solid #62b6cb; border-radius:3px;}
+        </style>
+    </head>
+
+    <body>
+        <header>
+            <nav class="navbar navbar-expand-lg fixed-top"
+                 style="background-color:#000; padding-bottom:0px; padding-top:1px;">
+                <div class="navbar-header">
+                    <a class="navbar-brand"
+                       href="/"><h3 style="font-weight:bold; padding-right:10px;">ArtPalace</h3></a>
+                </div>
+                <div class="navbar-collapse row" id="navbarNav">
+                    <ul class="navbar-nav">
+                        <li class="nav-item">
+                            <span style="font-size:1.4em; font-weight:bold;"> | </span>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/" style="padding-left:8px; padding-right:4px;">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/browse"
+                               style="padding-left: 4px; padding-right:4px;">Browse</a>
+                        </li>
+                        {% if user.is_authenticated %}
+                            <li class="nav-item">
+                                <span style="font-size: 1.4em; font-weight: bold;"> | </span>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="/upload"
+                                   style="padding-left:4px; padding-right:4px;">Upload</a>
+                            </li>
+                        {% endif %}
+                    </ul>
+                </div>
+                <div class="navbar-nav navbar-right row">
+                    <ul class="navbar-nav">
+                        {% if user.is_authenticated %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="/profile" style="padding-left:4px; padding-right:4px;">
+                                Profile page</a>
+                        </li>
+                        <li class="nav-item" style="padding-right:10px;">
+                            <a class="nav-link" href="/logout" style="padding-left:4px; padding-right:4px;">
+                                Log out</a>
+                        </li>
+                        {% else %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="/register" style="padding-left:4px; padding-right:4px;">
+                                Register</a>
+                        </li>
+                        <li class="nav-item" style="padding-right:10px;">
+                            <a class="nav-link" href="/login" style="padding-left:4px; padding-right:4px;">
+                                Log in</a>
+                        </li>
+                        {% endif %}
+                    </ul>
+                </div>
+            </nav>
+            <br><br>
+        </header>
+        <br>
+        <main class="container-fluid">
+            {% if messages %}
+            {% for message in messages %}
+                <div class="row">
+                    <div class="col-lg-3"></div>
+                    <div class="alert {{ message.tags }} alert-dismissible col-lg-6" role="alert">
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                        {{ message }}
+                    </div>
+                </div>
+            {% endfor %}
+            {% endif %}
+            <br>
+            {% block content %}
+            {% endblock %}
+        </main>
+        <br><br><br>
+
+        <footer class="container-fluid">
+            <div class="row">
+                <div class="col-sm-8">
+                    Vavrečková Klára, IT4
+                </div>
+                <div class="col-sm-4 text-right" style="padding-left: 100px;">
+                    &copy;2021
+                </div>
+            </div>
+        </footer>
+    </body>
+
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+            integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+            crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+            integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+            crossorigin="anonymous"></script>
+</html>

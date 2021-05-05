@@ -1,0 +1,27 @@
+{% extends 'AP/main.html' %}
+
+{% block content %}
+    <style>a.box {display: flex; flex-wrap: wrap; flex-direction: row; margin: 10px;}</style>
+    <div class="container">
+        <h3 style="font-weight:bold; text-decoration:underline;">{{ category.name }}</h3>
+        <p>{{ category.desc }}</p>
+        <hr>
+        <div class="row">
+        {% for art in artworks %}
+            {% if art.art is not None %}
+            {% if art.cat.id == category.id %}
+            <div>
+                <a class="box" href="/art/{{ art.id }}">
+                <figure class="text-center">
+                    <img src="{{ art.art.url }}" alt="{{ art.art.url }}" height="285px"
+                     style="border: 3px solid #62b6cb; border-radius: 3px; padding: 2px;">
+                    <figcaption>{{ art.name }}</figcaption>
+                </figure>
+                </a>
+            </div>
+            {% endif %}
+            {% endif %}
+        {% endfor %}
+        </div>
+    </div>
+{% endblock %}

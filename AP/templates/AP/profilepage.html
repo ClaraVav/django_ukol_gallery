@@ -1,0 +1,29 @@
+{% extends 'AP/main.html' %}
+
+{% block content %}
+    <h2 class="nadpis">Hello {{ user.username }}, welcome to your profile!</h2>
+    <hr>
+    <ul>
+        <li>Name: {{ user.username }}</li>
+        <li>ID: {{ user.id }}</li>
+    </ul>
+    <hr>
+    <h3 style="color:#1B4965; font-weight:bold;">Your works:</h3>
+    <div class="row container">
+    {% for art in artworks %}
+        {% if art.art is not None %}
+        {% if art.author.id == user.id %}
+        <div>
+            <a class="box" href="/art/{{ art.id }}">
+            <figure class="text-center">
+                <img src="{{ art.art.url }}" alt="{{ art.art.url }}" height="285px"
+                 style="border: 3px solid #62b6cb; border-radius: 3px; padding: 2px;">
+                <figcaption>{{ art.name }}</figcaption>
+            </figure>
+            </a>
+        </div>
+        {% endif %}
+        {% endif %}
+    {% endfor %}
+    </div>
+{% endblock %}

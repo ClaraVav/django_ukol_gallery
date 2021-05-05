@@ -1,0 +1,11 @@
+{% extends 'AP/main.html' %}
+
+{% block content %}
+    <div class="text-center">
+        <img src="{{ art.art.url }}" alt="{{ art.art.url }}" width="500px"
+             style="border: 3px solid #62b6cb; border-radius: 3px; padding: 2px;">
+        <hr>
+    </div>
+    <h2 style="font-weight: bold; color: #62B6CB;">{{ art.name }}</h2>
+    <p>{{ art.desc }}</p>
+{% endblock %}

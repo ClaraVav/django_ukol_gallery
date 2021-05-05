@@ -1,0 +1,37 @@
+{% extends 'AP/main.html' %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-sm-3"></div>
+        <form class="col-sm-6 post-form text-center" method="POST">
+            <br>
+            <h2 class="nadpis">Log in</h2>
+            <br>
+            {% csrf_token %}
+            <div class="row">
+            <div class="col-md-3"> </div>
+            <div class="col-md-6">
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">
+                            <i class="fas fa-user"></i>
+                        </span>
+                    </div>
+                    <input type="text" class="form-control" placeholder="Username" name="username">
+                </div>
+                <br>
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">
+                            <i class="fas fa-lock"></i>
+                        </span>
+                    </div>
+                    <input type="password" class="form-control" placeholder="Password" name="password">
+                </div>
+            </div>
+            </div>
+            <br>
+            <button type="submit" class="save btn btn-outline-info">Sign in</button>
+        </form>
+    </div>
+{% endblock %}

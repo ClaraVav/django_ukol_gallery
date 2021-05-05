@@ -1,0 +1,34 @@
+{% extends 'AP/main.html' %}
+
+{% block content %}
+    <h2 class="nadpis">Welcome to ArtPalace!</h2>
+    <p class="text-center" style="font-style: italic;">Where art reigns supreme.</p>
+    <hr>
+
+    <style>
+        a.box {display: flex; flex-wrap: wrap; flex-direction: row; margin: 10px;}
+    </style>
+    <div class="row box">
+    {% for art in works %}
+        {% if art.art is not None %}
+        <div>
+            <a class="box" href="art/{{ art.id }}">
+            <figure class="text-center">
+                <img src="{{ art.art.url }}" alt="{{ art.art.url }}" height="285px"
+                 style="border: 3px solid #62b6cb; border-radius: 3px; padding: 2px;">
+                <figcaption>{{ art.name }}</figcaption>
+            </figure>
+            </a>
+        </div>
+        {% endif %}
+    {% endfor %}
+    </div>
+
+    <div style="background-color: #1B4965; padding: 10px; border-radius: 5px;">
+    {% for cat in cats %}
+        <a href="/category/{{ cat.pk }}">{{ cat.name }}</a>
+        <span style="color: #62B6CB;"> | </span>
+    {% endfor %}
+    <a href="/category/new">New Category</a>
+    </div>
+{% endblock %}
